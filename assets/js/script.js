@@ -1,10 +1,12 @@
 
-var timerEl = document.querySelector("#start-button")
+var timerEl = document.querySelector("#start-button");
 var timerInstances = 0;
 
+var introEl = document.querySelector("#intro");
+var questionEl = document.querySelector("#question");
 
 // countdown timer
-var timerCountdown = function (event) {
+var timerCountdown = function () {
 
     // prevents multiple instances of timer
     if (timerInstances === 1) {
@@ -33,4 +35,10 @@ var timerCountdown = function (event) {
 
 };
 
-timerEl.addEventListener("click", timerCountdown)
+var displayQuiz = function (event) {
+    introEl.hidden = true;
+    questionEl.hidden = false;
+    timerCountdown();
+};
+
+timerEl.addEventListener("click", displayQuiz)
