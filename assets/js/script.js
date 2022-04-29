@@ -7,8 +7,11 @@ var currentPosition = 90;
 
 var introEl = document.querySelector("#intro");
 var questionEl = document.querySelector("#question");
+var endEl = document.querySelector("#quizDone");
 
 var playerScore = 0;
+
+var highScores = [];
 
 // array of questions
 
@@ -74,8 +77,8 @@ var timerCountdown = function () {
     else {
         timerInstances = 1;
     }
-
-    currentPosition = 90;
+    // remember to change back to 90
+    currentPosition = 10;
 
     var timerText = document.querySelector("#timerText");
 
@@ -88,6 +91,7 @@ var timerCountdown = function () {
             // allows another timer to run
             timerInstances = 0;
             timerText.textContent = 0;
+            endQuiz();
         }
 
         currentPosition--;
@@ -116,7 +120,7 @@ var quizOperation = function (event) {
         return;
     }
 
-    if (event.target.value === questionPool[currentQuestion].correct){
+    if (event.target.value === questionPool[currentQuestion].correct) {
         questionEl.querySelector("#questionResult").textContent = "Correct";
         playerScore++;
         questionEl.querySelector("#score").textContent = "Current Score: " + playerScore;
@@ -151,5 +155,55 @@ var populateQuestion = function (questionNumber) {
 
 };
 
+var endQuiz = function () {
+    questionEl.hidden = true;
+    endEl.hidden = false;
+
+    endEl.querySelector("#finalScore").textContent = "Your final score is " + playerScore;
+};
+
+var submitQuiz = function (event) {
+    
+    if (event.target.value != "submit") {
+        return;
+    }
+
+    var userInitials = endEl.querySelector("#initials").value;
+
+    if (!userInitials){
+        alert("Please enter initials");
+        return;
+    }
+
+    var scoreObj = {
+        initials: userInitials,
+        score: playerScore
+    };
+
+    highScores.push(scoreObj);
+    saveScores();
+
+    
+};
+
+
+// saving and loading high scores functions
+var saveScores = function(){
+    localStorage.setItem("userScores", JSON.stringify(highScores));
+};
+
+var loadScores = function(){
+    var savedScores = localStorage.getItem("userScores");
+
+    if(!savedScores){
+        return false;
+    }
+
+    highScores = JSON.parse(savedScores);
+};
+
+loadScores();
+
 timerEl.addEventListener("click", startQuiz);
 questionEl.addEventListener("click", quizOperation);
+endEl.addEventListener("click", submitQuiz);
