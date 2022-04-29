@@ -8,6 +8,8 @@ var currentPosition = 90;
 var introEl = document.querySelector("#intro");
 var questionEl = document.querySelector("#question");
 
+var playerScore = 0;
+
 // array of questions
 
 var questionPool =
@@ -81,10 +83,11 @@ var timerCountdown = function () {
     var countDown = setInterval(function () {
         timerText.textContent = currentPosition;
 
-        if (currentPosition === 0) {
+        if (currentPosition <= 0) {
             clearInterval(countDown);
             // allows another timer to run
             timerInstances = 0;
+            timerText.textContent = 0;
         }
 
         currentPosition--;
@@ -107,7 +110,6 @@ var startQuiz = function () {
 // main handling of quiz
 var quizOperation = function (event) {
 
-    var userAnswer = event.target.value;
 
     // check if button is clicked, if not exits function
     if (!event.target.value) {
@@ -115,8 +117,19 @@ var quizOperation = function (event) {
     }
 
     if (event.target.value === questionPool[currentQuestion].correct){
-        console.log("correct");
+        questionEl.querySelector("#questionResult").textContent = "Correct";
+        playerScore++;
+        questionEl.querySelector("#score").textContent = "Current Score: " + playerScore;
     }
+
+    else {
+        currentPosition -= 5;
+        questionEl.querySelector("#questionResult").textContent = "Wrong";
+    }
+
+    currentQuestion = randomQuestion();
+
+    populateQuestion(currentQuestion);
 
 };
 
