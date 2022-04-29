@@ -20,9 +20,8 @@ THEN I can save my initials and score
 
 ## Deployment URL
 
-
-
+https://wctestbank.github.io/04-CodeQuiz/
 
 ## Example Application screenshot
 
-![Demo Image]()
+![Demo Image](./assets/images/demo.png)
