@@ -2,6 +2,9 @@
 var timerEl = document.querySelector("#start-button");
 var timerInstances = 0;
 
+// global timer variable
+var currentPosition = 90;
+
 var introEl = document.querySelector("#intro");
 var questionEl = document.querySelector("#question");
 
@@ -10,12 +13,48 @@ var questionEl = document.querySelector("#question");
 var questionPool =
     [
         {
-            question: "Test",
-            option1: "Test 1",
-            option2: "Test 2",
-            option3: "Test 3",
-            option4: "Test 4",
-            correct: 1
+            question: "A useful tool used for printing content to the debugger is:",
+            option1: "Javascript",
+            option2: "terminal",
+            option3: "DOM",
+            option4: "console.log",
+            correct: "4"
+        },
+
+        {
+            question: "Commonly used data types do not include:",
+            option1: "strings",
+            option2: "booleans",
+            option3: "alerts",
+            option4: "numbers",
+            correct: "3"
+        },
+
+        {
+            question: "The condition in an if / else statement is enclosed with ___:",
+            option1: "quotes",
+            option2: "curly brackets",
+            option3: "parenthesis",
+            option4: "square brackets",
+            correct: "3"
+        },
+
+        {
+            question: "Arrays in JavaScript can be used to store ___:",
+            option1: "numbers and strings",
+            option2: "other arrays",
+            option3: "booleans",
+            option4: "all of the above",
+            correct: "4"
+        },
+
+        {
+            question: "String values must be enclosed within ___ when being assigned:",
+            option1: "commas",
+            option2: "curly brackets",
+            option3: "quotes",
+            option4: "parenthesis",
+            correct: "3"
         }
     ];
 
@@ -34,7 +73,7 @@ var timerCountdown = function () {
         timerInstances = 1;
     }
 
-    var currentPosition = 90;
+    currentPosition = 90;
 
     var timerText = document.querySelector("#timerText");
 
@@ -68,19 +107,28 @@ var startQuiz = function () {
 // main handling of quiz
 var quizOperation = function (event) {
 
-    if (event.target.value) {
-        var userAnswer = event.target.value;
-        console.log(userAnswer);
+    var userAnswer = event.target.value;
+
+    // check if button is clicked, if not exits function
+    if (!event.target.value) {
+        return;
     }
+
+    if (event.target.value === questionPool[currentQuestion].correct){
+        console.log("correct");
+    }
+
 };
 
+// generates random number to decide of question
 var randomQuestion = function () {
     return Math.floor(Math.random() * questionPool.length);
 };
 
+
+// populates question fields with current question
 var populateQuestion = function (questionNumber) {
 
-    // populates question fields with current question
     questionEl.querySelector("#questionText").textContent = questionPool[questionNumber].question;
 
     questionEl.querySelector("#a1").textContent = questionPool[questionNumber].option1;
