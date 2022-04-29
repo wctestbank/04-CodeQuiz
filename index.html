@@ -17,7 +17,7 @@
 
         <!-- timer -->
         <div>
-            <h2 id="timerText">90</h2>
+            <h2 id="timerText">30</h2>
         </div>
 
     </header>
@@ -27,7 +27,7 @@
         <!-- Title and question -->
         <div id="intro">
             <h2 id="introTitle">Javascript Quiz</h2>
-            <p id="introText">Try to answer the code related questions within the time limit.</p>
+            <p id="introText">Try to answer the random code related questions within the time limit.</p>
             <button type="button" id="start-button">Start</button>
         </div>
 
@@ -43,7 +43,7 @@
 
         </div>
 
-        <div id="quizDone">
+        <div id="quizDone" hidden>
             <h2>All done!</h2>
             <p id="finalScore">Your final score is</p>
             <p>Enter initials:</p>
@@ -51,9 +51,11 @@
             <button type="button" id="submitScore" value="submit">Submit</button>
         </div>
 
-        <div id="highScores">
-            <h2>High scores</h2>
-            
+        <div id="highScores" hidden>
+            <h2>Saved scores</h2>
+            <ul id="scoreList"></ul>
+
+            <button type="button" id="returnToStart" value="return">Restart</button>
         </div>
 
     </main>
