@@ -140,7 +140,13 @@ var quizOperation = function (event) {
 
 // generates random number to decide of question
 var randomQuestion = function () {
-    return Math.floor(Math.random() * questionPool.length);
+    var returnNumber = Math.floor(Math.random() * questionPool.length);
+
+    // prevents repeat questions
+    while (currentQuestion === returnNumber){
+        returnNumber = Math.floor(Math.random() * questionPool.length);
+    }
+    return returnNumber;
 };
 
 
