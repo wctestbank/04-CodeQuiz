@@ -85,13 +85,13 @@ var timerCountdown = function () {
 
     // updates timer every second
     var countDown = setInterval(function () {
-        timerText.textContent = currentPosition;
+        timerText.textContent = "Time Left: " + currentPosition;
 
         if (currentPosition <= 0) {
             clearInterval(countDown);
             // allows another timer to run
             timerInstances = 0;
-            timerText.textContent = 0;
+            timerText.textContent = "Time Left: 0";
             endQuiz();
         }
 
@@ -194,7 +194,7 @@ var submitQuiz = function (event) {
     // reset values for new quiz
     playerScore = 0;
     endEl.querySelector("#initials").value = "";
-    document.querySelector("#timerText").textContent = 30;
+    document.querySelector("#timerText").textContent = "Time Left: 30";
     questionEl.querySelector("#score").textContent = "Current Score: 0";
     questionEl.querySelector("#questionResult").textContent = "";
 
